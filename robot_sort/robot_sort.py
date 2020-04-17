@@ -97,7 +97,39 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # My plan, while I'm hesitant because of the slowness involved is to use the bubble_sort recursively.
+        # Utilizing the robot's one bit of memory, the light, we can set swaps occured to either 
+        # True or False since we cannot stor any variables. The idea would be: starting at the first index 
+        # the robot picks up each item and compares it to the next item until it reaches the end of the 
+        # array and then doing the same headed left in the opposite direction
+        self.set_light_on()
+        while self.light_is_on():
+            self.set_light_off()
+            for i in range(len(l)-1):
+                self.compare_item
+                self.swap_item()
+                if self.can_move_right:
+                    self.move_right()
+                    if self.compare_item() == 1:
+                        self.swap_item()
+                        self.set_light_on()
+                        self.sort() 
+                else:
+                    self.compare_item()
+                    self.swap_item()
+                    self.set_light_on
+                    if self.can_move_left:
+                        self.move_left()
+                        if self.compare_item() == -1:
+                            self.swap_item()
+                            self.set_light_on()
+                            self.sort()
+        return l
+                
+
+
+                
+                    
 
 
 if __name__ == "__main__":
