@@ -97,33 +97,44 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        # My plan, while I'm hesitant because of the slowness involved is to use the bubble_sort recursively.
+        # My plan, while I'm hesitant because of the slowness involved is to use the bubble_sort type.
         # Utilizing the robot's one bit of memory, the light, we can set swaps occured to either 
         # True or False since we cannot stor any variables. The idea would be: starting at the first index 
         # the robot picks up each item and compares it to the next item until it reaches the end of the 
         # array and then doing the same headed left in the opposite direction
+        # the modification is to sweep back and forth, cycling between moving left and right until the 
+        # end of the list is reached, picking up the larger or smaller value depending on the direction
+        
+
+        # initialize with the light on
         self.set_light_on()
+        # while the light is on (swaps are happening) loop through the list
         while self.light_is_on():
+            # setl the light off at the begining of the next loop to check for swaps later.
             self.set_light_off()
+            # nested loop for each value in the list
             for i in range(len(l)-1):
-                self.compare_item
-                self.swap_item()
-                if self.can_move_right:
+                # initialize item holding
+                if self.compare_item() == 0 and i == 0:
+                    self.swap_item()
+                # set base case
+                elif self.compare_item() == 0:
+                    return l
+                # if the robot can move right move right from the start of the index
+                while self.can_move_right:
+                    # move right and compare the item to the next
                     self.move_right()
+                    # if the item in the array is greater swap it
                     if self.compare_item() == 1:
                         self.swap_item()
+                        # turn on the light
                         self.set_light_on()
-                        self.sort() 
                 else:
-                    self.compare_item()
-                    self.swap_item()
-                    self.set_light_on
-                    if self.can_move_left:
+                    while self.can_move_left:
                         self.move_left()
                         if self.compare_item() == -1:
                             self.swap_item()
                             self.set_light_on()
-                            self.sort()
         return l
                 
 
