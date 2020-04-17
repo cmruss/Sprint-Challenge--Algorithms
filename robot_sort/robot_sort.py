@@ -113,29 +113,38 @@ class SortingRobot:
             # setl the light off at the begining of the next loop to check for swaps later.
             self.set_light_off()
             # nested loop for each value in the list
-            for i in range(len(l)-1):
+            for i in range(0,len(l)-1):
                 # initialize item holding
-                if self.compare_item() == 0 and i == 0:
+                if self.compare_item() is None and i == 0:
+                    print(f"compared items at start")
                     self.swap_item()
-                # set base case
-                elif self.compare_item() == 0:
-                    return l
-                # if the robot can move right move right from the start of the index
-                while self.can_move_right:
-                    # move right and compare the item to the next
-                    self.move_right()
-                    # if the item in the array is greater swap it
-                    if self.compare_item() == 1:
-                        self.swap_item()
-                        # turn on the light
-                        self.set_light_on()
-                else:
-                    while self.can_move_left:
-                        self.move_left()
+                    print(f"picked up item")
+                    self.set_light_on()
+                    print(f"light turned on")
+                    while self.compare_item() != -1 and self.can_move_right():
+                        # move right and compare the item to the next
+                        self.move_right()
+                        print(f"moving right")
+                        # if the item in the array is greater swap it
                         if self.compare_item() == -1:
                             self.swap_item()
+                            print(f"swapped item")
+                            # turn on the light
                             self.set_light_on()
-        return l
+                            print(f"light turned on")
+                    if self.can_move_right() == False:
+                        self.swap_item()
+                        self.set_light_on()
+                        while self.can_move_left() and self.compare_item != 1:
+                            self.move_left()
+                            print(f"moving left")
+                            # same as right but for opposite value
+                            if self.compare_item() == 1:
+                                self.swap_item()
+                                # print(l)
+                                self.set_light_on()
+        #definitely needs work
+        # return l
                 
 
 
