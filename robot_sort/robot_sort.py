@@ -110,46 +110,45 @@ class SortingRobot:
         self.set_light_on()
         # while the light is on (swaps are happening) loop through the list
         while self.light_is_on():
-            # setl the light off at the begining of the next loop to check for swaps later.
+            # set the light off at the begining of the next loop to check for swaps later.
             self.set_light_off()
+# CUT
             # nested loop for each value in the list
-            for i in range(0,len(l)-1):
+            # for i in range(len(l)-1): <-- DO NOT NEED THIS EXTRA LOOP, AGAINST RULES ANYWAY
                 # initialize item holding
-                if self.compare_item() is None and i == 0:
-                    print(f"compared items at start")
+                # if self.compare_item() is None: <-- DO NOT NEED TO INITIALIZE
+                    # self.swap_item()
+                    # self.set_light_on()
+                    # while self.compare_item() != -1 and self.can_move_right(): <-- LOOP CONDITIONS OVERLY COMPLEX
+# CUT
+            while self.can_move_right():
+                self.swap_item()
+                # move right and compare the item to the next
+                self.move_right()
+                # if the item in the array is lesser swap it
+                if self.compare_item() == 1: 
                     self.swap_item()
-                    print(f"picked up item")
+                    # turn on the light
                     self.set_light_on()
-                    print(f"light turned on")
-                    while self.compare_item() != -1 and self.can_move_right():
-                        # move right and compare the item to the next
-                        self.move_right()
-                        print(f"moving right")
-                        # if the item in the array is greater swap it
-                        if self.compare_item() == -1:
-                            self.swap_item()
-                            print(f"swapped item")
-                            # turn on the light
-                            self.set_light_on()
-                            print(f"light turned on")
-                    if self.can_move_right() == False:
-                        self.swap_item()
-                        self.set_light_on()
-                        while self.can_move_left() and self.compare_item != 1:
-                            self.move_left()
-                            print(f"moving left")
-                            # same as right but for opposite value
-                            if self.compare_item() == 1:
-                                self.swap_item()
-                                # print(l)
-                                self.set_light_on()
-        #definitely needs work
-        # return l
-                
+                # and put the one with the smaller value to the left
+                self.move_left()
+                self.swap_item()
+                # move on and do it again until the end is reached
+                self.move_right()
 
-
-                
-                    
+            # while self.can_move_left() and self.compare_item != 1: <-- OVERLY COMPLEX
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+                # same as above but reversed, putting the larger to the right
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    # print(l)
+                    self.set_light_on()
+            # if self.can_move_left == False: <-- NOT NEEDED
+                self.move_right()
+                self.swap_item()
+                self.move_left()                    
 
 
 if __name__ == "__main__":
@@ -162,3 +161,8 @@ if __name__ == "__main__":
 
     robot.sort()
     print(robot._list)
+
+    arr = [85, 46, 27, 81, 94, 9, 27, 38, 43, 99, 37, 63, 31, 42, 14]
+
+    comp = [i for i in arr if i %3 == 0]
+    print(comp)
