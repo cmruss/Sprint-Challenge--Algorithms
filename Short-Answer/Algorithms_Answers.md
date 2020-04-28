@@ -5,7 +5,7 @@
 a) O(n) This function sets the value of a to (n squared) while (n cubed) is greater than a, so it's time complexity would be O(n).
 
 
-b) O(n²) This function is O(n²) because it contains a loop nested inside of another loop, each individually would be O(n), but when nesting we're actually running one entire loop through n for every iteration of the parent loop, giving us an exponential time increase as n grows.
+b) O(log(n)) This function is O(log(n)), it contains a loop nested inside of another loop, each individually would be O(n), and if the restricions of the second loop were different, or absent, other big O values might be different. Because this is filtering returned results the number disparity grows greater as the int length grows bigger.
 
 
 c) O(n) This funtion is called recursively n amount of times until it reaches it's
