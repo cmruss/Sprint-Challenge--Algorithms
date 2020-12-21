@@ -97,7 +97,58 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # My plan, while I'm hesitant because of the slowness involved is to use the bubble_sort type.
+        # Utilizing the robot's one bit of memory, the light, we can set swaps occured to either 
+        # True or False since we cannot stor any variables. The idea would be: starting at the first index 
+        # the robot picks up each item and compares it to the next item until it reaches the end of the 
+        # array and then doing the same headed left in the opposite direction
+        # the modification is to sweep back and forth, cycling between moving left and right until the 
+        # end of the list is reached, picking up the larger or smaller value depending on the direction
+        
+
+        # initialize with the light on
+        self.set_light_on()
+        # while the light is on (swaps are happening) loop through the list
+        while self.light_is_on():
+            # set the light off at the begining of the next loop to check for swaps later.
+            self.set_light_off()
+# CUT
+            # nested loop for each value in the list
+            # for i in range(len(l)-1): <-- DO NOT NEED THIS EXTRA LOOP, AGAINST RULES ANYWAY
+                # initialize item holding
+                # if self.compare_item() is None: <-- DO NOT NEED TO INITIALIZE
+                    # self.swap_item()
+                    # self.set_light_on()
+                    # while self.compare_item() != -1 and self.can_move_right(): <-- LOOP CONDITIONS OVERLY COMPLEX
+# CUT
+            while self.can_move_right():
+                self.swap_item()
+                # move right and compare the item to the next
+                self.move_right()
+                # if the item in the array is lesser swap it
+                if self.compare_item() == 1: 
+                    self.swap_item()
+                    # turn on the light
+                    self.set_light_on()
+                # and put the one with the smaller value to the left
+                self.move_left()
+                self.swap_item()
+                # move on and do it again until the end is reached
+                self.move_right()
+
+            # while self.can_move_left() and self.compare_item != 1: <-- OVERLY COMPLEX
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+                # same as above but reversed, putting the larger to the right
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    # print(l)
+                    self.set_light_on()
+            # if self.can_move_left == False: <-- NOT NEEDED
+                self.move_right()
+                self.swap_item()
+                self.move_left()                    
 
 
 if __name__ == "__main__":
@@ -110,3 +161,8 @@ if __name__ == "__main__":
 
     robot.sort()
     print(robot._list)
+
+    arr = [85, 46, 27, 81, 94, 9, 27, 38, 43, 99, 37, 63, 31, 42, 14]
+
+    comp = [i for i in arr if i %3 == 0]
+    print(comp)
